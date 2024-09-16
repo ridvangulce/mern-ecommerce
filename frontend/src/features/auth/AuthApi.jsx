@@ -10,7 +10,8 @@ export const signup=async(cred)=>{
 }
 export const login=async(cred)=>{
     try {
-        const res=await axiosi.post("auth/login",cred)
+        const res = await axiosi.post("/auth/login", cred); // Sadece /login değil, /auth/login olmalı
+
         return res.data
     } catch (error) {
         throw error.response.data

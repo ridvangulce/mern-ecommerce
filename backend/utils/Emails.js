@@ -8,11 +8,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendMail = async(receiverEmail,subject,body) => {
-    await transporter.sendMail({
-    from: process.env.EMAIL,
-    to: receiverEmail,
-    subject: subject,
-    html: body
-  });
+exports.sendMail = async (receiverEmail, subject, body) => {
+  const mailOptions = {
+    from: process.env.EMAIL,  // Gönderen email adresi (.env dosyasından alınır)
+    to: receiverEmail,        // Alıcı email adresi
+    subject: subject,         // Email başlığı
+    html: body                // Email içeriği (HTML formatında)
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.log('Error sending email:', error);
+    throw error;
+  }
 };
+

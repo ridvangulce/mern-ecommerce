@@ -41,6 +41,10 @@ server.use("/address",addressRoutes)
 server.use("/reviews",reviewRoutes)
 server.use("/wishlist",wishlistRoutes)
 
+server.use(cors({
+    origin: process.env.ORIGIN || 'http://localhost:3000', // Frontend'in URL'si
+    credentials: true // Eğer cookies kullanıyorsanız, bu gerekli
+}));
 
 
 server.get("/",(req,res)=>{
